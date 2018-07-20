@@ -1,4 +1,4 @@
-require('dotenv').load();
+require('dotenv').config();
 
 var key = require('./key.js');
 
@@ -25,9 +25,11 @@ var getMyTweets = function () {
     var client = new Twitter(key.twitter);
     //creating an instance of an object
 
-    var params = {screen_name: 'peterki25399602' };
+    var params = {screen_name: 'peterki25399602'};
     client.get('statuses/user_timeline', params, function (error, tweets, response) {
         console.log(error)
+        console.log(tweets);
+        console.log(response);
         if (!error) {
                 console.log(tweets);
             for (var i = 0; i < tweets.length; i++) {
@@ -75,18 +77,17 @@ var getMovie = function (movieName) {
 
             //Parse the body of the site and recover just the imdbRating
             //(Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-            var jsonData = JSON.parse(body)
+            var jsonData = JSON.parse(body);
+            //console.log(body);
             console.log('Title: ' + jsonData.Title);
             console.log('Year: ' + jsonData.Year);
             console.log('Rated: ' + jsonData.Rated);
             console.log('IMBD Rating: ' + jsonData.imbdRating);
+            console.log('Rotten tomatoes rating: ' + jsonData.Ratings[1].Value);
             console.log('Country: ' + jsonData.Country);
             console.log('Language: ' + jsonData.Language);
             console.log('Plot:' + jsonData.Plot);
             console.log('Actors: ' + jsonData.Actors);
-            
-            
-            console.log('Rotten tomatoes URL: ' + jsonData.tomoatURL);
         }
     })
 };
@@ -123,8 +124,9 @@ var pick = function (caseData, functionData) {
             getMovie(functionData);
             } else {
                 getMovie('Mr. Nobody');
-                console.log('If you have not watched it, you really should.  it is on netflix.')
+                console.log('If you have not watched it, you really should.  it is on netflix.');
             }
+            break;
         case 'do-what-it-says':
             doWhatItSays();
             break;
