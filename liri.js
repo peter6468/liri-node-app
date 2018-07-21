@@ -12,11 +12,8 @@ var Spotify = require('node-spotify-api');
 //     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 // });
 
-
-var spotify = new Spotify({
-    id: process.env.SPOTIFY_ID,
-    secret: process.env.SPOTIFY_SECRET 
-});
+//keys.spotify
+var spotify = new Spotify(key.spotify);
 var request = require('request');
 var fs = require('fs');
 
@@ -28,17 +25,15 @@ var getMyTweets = function () {
     var params = {screen_name: 'peterki25399602'};
     client.get('statuses/user_timeline', params, function (error, tweets, response) {
         console.log(error)
-        console.log(tweets);
-        console.log(response);
         if (!error) {
-                console.log(tweets);
+                //console.log(tweets);
             for (var i = 0; i < tweets.length; i++) {
                 console.log(tweets[i].created_at);
                 console.log('');
                 console.log(tweets[i].text);
             }
         }else{
-            console.log(error);
+            //console.log(error);
         }
     });
 }
@@ -82,7 +77,7 @@ var getMovie = function (movieName) {
             console.log('Title: ' + jsonData.Title);
             console.log('Year: ' + jsonData.Year);
             console.log('Rated: ' + jsonData.Rated);
-            console.log('IMBD Rating: ' + jsonData.imbdRating);
+            console.log('IMBD Rating: ' + jsonData.imdbRating);
             console.log('Rotten tomatoes rating: ' + jsonData.Ratings[1].Value);
             console.log('Country: ' + jsonData.Country);
             console.log('Language: ' + jsonData.Language);
