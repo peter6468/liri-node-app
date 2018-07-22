@@ -18,21 +18,21 @@ var request = require('request');
 var fs = require('fs');
 
 var getMyTweets = function () {
-    
+
     var client = new Twitter(key.twitter);
     //creating an instance of an object
 
-    var params = {screen_name: 'peterki25399602'};
+    var params = { screen_name: 'peterki25399602' };
     client.get('statuses/user_timeline', params, function (error, tweets, response) {
         console.log(error)
         if (!error) {
-                //console.log(tweets);
+            //console.log(tweets);
             for (var i = 0; i < tweets.length; i++) {
                 console.log(tweets[i].created_at);
                 console.log('');
                 console.log(tweets[i].text);
             }
-        }else{
+        } else {
             //console.log(error);
         }
     });
@@ -83,9 +83,14 @@ var getMovie = function (movieName) {
             console.log('Language: ' + jsonData.Language);
             console.log('Plot:' + jsonData.Plot);
             console.log('Actors: ' + jsonData.Actors);
+
+            //adds text to log.txt
+            //fs.appendFile('log.txt', "Title: " + jsonData.Title);
+
         }
     })
 };
+
 
 var doWhatItSays = function () {
     fs.readFile('random.txt', 'utf8', function (err, data) {
@@ -108,15 +113,15 @@ var pick = function (caseData, functionData) {
             getMyTweets();
             break;
         case 'spotify-this-song':
-            if (functionData){
-            getMySpotify(functionData);
-            }else {
+            if (functionData) {
+                getMySpotify(functionData);
+            } else {
                 getMySpotify('Ace of Base: The Sign');
             }
             break;
         case 'movie-this':
-            if (functionData){
-            getMovie(functionData);
+            if (functionData) {
+                getMovie(functionData);
             } else {
                 getMovie('Mr. Nobody');
                 console.log('If you have not watched it, you really should.  it is on netflix.');

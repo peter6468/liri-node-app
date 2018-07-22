@@ -1,4 +1,4 @@
-console.log('this is loaded 2')
+//console.log('this is loaded 2')
 //var codes = require('./env');
 
 //require('dotenv').config();
